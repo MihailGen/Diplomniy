@@ -22,7 +22,14 @@ class TaskTests(TestCase):
         self.client.login(password='testuser', email="user@inbox.ru")
         self.reviews = Reviews.objects.create(film=self.film, user=self.user, reviews_body='Очень хороший фильм!!!')
 
-    def test_view_film(self):  # Тест на просмотр задачи. Работает!
+    #path('details/<int:film_id>/', views.film_details, name='film_details'),
+    def test_film_details(self):
+        url = reverse('film_details', args=[self.film.pk])  # эндпоинт с именем 'search_results'
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    def test_view_film(self):  # Тест на просмотр фильма. Работает!
         film = Film.objects.get(id=self.film.id)
         self.assertEqual(film.title, "Test Film")
         self.assertEqual(film.director, "Феллини")
@@ -65,17 +72,15 @@ class TaskTests(TestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_rating_create(self):
+    def test_rating_create(self): # Тест на создание рейтинга. Работает!
         url = reverse('rating_create', args=[self.film.pk])
         data = dict(film=self.film, user=self.user.pk, rating='1')
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
-    def test_reviews_create(self):
+    def test_reviews_create(self): # Тест на создание рицензии. Работает!
         url = reverse('reviews_create', args=[self.film.pk])
-        print(url)
         data = dict(film=self.film, user='1', reviews_body='Очень, ну очень хороший фильм!!!')
-        print(data)
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 

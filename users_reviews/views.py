@@ -40,7 +40,7 @@ def register(request):
             return redirect('films_list')
     else:
         form = UserRegisterForm()
-    return render(request, 'users_reviews/register.html', {'form': form})
+        return render(request, 'users_reviews/register.html', {'form': form})
 
 
 def login(request):
@@ -67,8 +67,7 @@ def profile_page(request):
             return redirect('profile')
     else:
         form = UserProfileForm(instance=user)
-
-    return render(request, 'users_reviews/profile.html', {'form': form})
+        return render(request, 'users_reviews/profile.html', {'form': form})
 
 
 class RegisterView(generics.CreateAPIView):

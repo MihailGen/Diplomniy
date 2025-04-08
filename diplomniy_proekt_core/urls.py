@@ -1,20 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
-from films import views
-from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,)
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, )
 
-from films.views import film_details
+from films import views
 from users_reviews.views import (RegisterView, register, reviews_create, ReviewsListView, ReviewsRetrievView,
                                  ReviewsUpdateView, ReviewsDestroyView, rating_create)
 
-
 urlpatterns = [
-    #path('users/', include('users_reviews.urls')),
     path('admin/', admin.site.urls),
     path('base/', views.base),
     path('films/', views.film_list, name='films_list'),
-    #path('films/', views.films),
-
 
     path('', include('films.urls')),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
@@ -27,14 +22,12 @@ urlpatterns = [
     path('register/', register, name='register'),
 
     path('', include('users_reviews.urls')),
-    path('login/', ReviewsListView.as_view(), name='comment-list'),
+    #path('login/', ReviewsListView.as_view(), name='comment-list'),
     path('reviews_create/<int:film_id>/', reviews_create, name='reviews_create'),
     path('rating_create/<int:film_id>/', rating_create, name='rating_create'),
     path('reviews/', ReviewsListView.as_view(), name='comment-list'),
     path('reviews/<int:pk>/', ReviewsRetrievView.as_view(), name='comment-retrieve'),
     path('reviews/<int:pk>/update/', ReviewsUpdateView.as_view(), name='comment-update'),
     path('reviews/<int:pk>/delete/', ReviewsDestroyView.as_view(), name='comment-destroy'),
-
-
 
 ]

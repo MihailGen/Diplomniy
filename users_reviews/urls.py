@@ -6,7 +6,4 @@ from users_reviews import views
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('profile/', views.profile_page, name='profile'),
-    #path('register/', register, name='register'),
-    #path('reviews_create/', reviews_create, name='reviews_create'),
-
 ]

@@ -14,35 +14,23 @@ def base(request):
     return render(request, 'films/base.html')
 
 
-def films(request):
-    film_list = Film.objects.all().order_by('-release_date')
-    return render(request, 'films/films.html', {'film_list': film_list})
-
-
 def film_details(request, film_id):
     film = Film_details.objects.get(id=film_id)
     reviews = Reviews.objects.filter(film=film_id)
-
     try:
         rating = Ratings.objects.get(film_id=film_id, user_id=request.user)
     except:
         rating = 0
-
-    print(rating)
     return render(request, 'films/film_details.html', {'film': film, 'reviews': reviews, 'rating': rating})
 
 
 def film_list(request):
-    #film_list = Film.objects.all().order_by('-release_date')
     film_list = Film_details.objects.all().select_related('film')
-    #poster = Film_details.objects.filter('film').values('poster')
-
     return render(request, 'films/films.html', {'film_list': film_list})
 
 
 @require_POST
 def delete_film(film_id):
-    # film = Film.objects.get(id=film_id)
     film = get_object_or_404(Film, pk=film_id)
     film.delete()
     return redirect('films')
