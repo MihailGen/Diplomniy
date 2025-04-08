@@ -13,8 +13,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', views.base),
     path('films/', views.film_list, name='films_list'),
-    #path('details/<int:film_id>/', film_details, name='film_details'),
     #path('films/', views.films),
+
+
     path('', include('films.urls')),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
     path('api-auth/', include('rest_framework.urls')),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('register/', register, name='register'),
 
     path('', include('users_reviews.urls')),
+    path('login/', ReviewsListView.as_view(), name='comment-list'),
     path('reviews_create/<int:film_id>/', reviews_create, name='reviews_create'),
     path('rating_create/<int:film_id>/', rating_create, name='rating_create'),
     path('reviews/', ReviewsListView.as_view(), name='comment-list'),

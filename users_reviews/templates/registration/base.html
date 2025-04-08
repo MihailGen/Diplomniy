@@ -1,0 +1,27 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}FILMOPOISK MICRO{% endblock %}</title>
+    {% block extrahead %}
+    {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<img src="{% static 'img/Kinopoisk_header.jpg' %}">
+<header>
+    <div class="company-name">
+        Филмопоиск микро:
+    </div>
+</header>
+{% block content %}
+<!-- Основное содержимое страницы -->
+{% endblock %}
+<footer>
+    <div class="footer-content">
+    </div>
+</footer>
+</body>
+</html>

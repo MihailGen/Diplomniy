@@ -53,7 +53,7 @@ def login(request):
             return redirect('films_list')
     else:
         form = UserRegisterForm()
-    return render(request, 'users_reviews/register.html', {'form': form})
+        return render(request, 'users_reviews/register.html', {'form': form})
 
 
 @login_required

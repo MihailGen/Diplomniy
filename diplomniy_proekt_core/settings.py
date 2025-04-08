@@ -142,3 +142,6 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'users_reviews.User'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
