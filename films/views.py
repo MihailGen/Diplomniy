@@ -4,11 +4,26 @@ from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from social_core.backends.utils import load_backends
 
 from films.models import Film, Film_details, Genre, Tags
 from films.serializers import FilmSerializer, Film_detailsSerializer, GenreSerializer, TagSerializer
 from users_reviews.models import Reviews, Ratings
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+#from social_django.utils import load_social_backends
 
+def login(request):
+    return render(request, 'login.html')
+@login_required
+def home(request):
+    return render(request, 'home.html')
+'''
+def login(request):
+    social_backends = load_backends()
+    context = {'social_backends': social_backends}
+    return render(request, 'login.html', context)
+'''
 
 def base(request):
     return render(request, 'films/base.html')

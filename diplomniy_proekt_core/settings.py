@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'films',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_bootstrap4',
 ]
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -43,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'diplomniy_proekt_core.urls'
@@ -58,10 +61,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', # Добавил эту строку
             ],
         },
     },
 ]
+
+
+
 
 WSGI_APPLICATION = 'diplomniy_proekt_core.wsgi.application'
 
@@ -145,3 +152,23 @@ AUTH_USER_MODEL = 'users_reviews.User'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '105370982746-h5j8e1sks4cv9mqlkg36te5pl89m7chq.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'GOCSPX-EO9O02SVd4ns55OTL3vCCT2B3H2'
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/complete/google-oauth2/'
+
+AUTHENTICATION_BACKENDS = (
+
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.contrib.vkontakte.VKontakteOAuth2Backend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.contrib.yandex.YandexOAuth2Backend',
+    'social_auth.backends.contrib.mailru.MailruBackend',
+    'social_auth.backends.contrib.odnoklassniki.OdnoklassnikiBackend',
+
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)

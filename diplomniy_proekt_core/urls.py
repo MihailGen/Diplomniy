@@ -30,4 +30,8 @@ urlpatterns = [
     path('reviews/<int:pk>/update/', ReviewsUpdateView.as_view(), name='comment-update'),
     path('reviews/<int:pk>/delete/', ReviewsDestroyView.as_view(), name='comment-destroy'),
 
+    path('', include('social_django.urls')),
+
 ]
+
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
