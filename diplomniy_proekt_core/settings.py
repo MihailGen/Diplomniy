@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # Add this line
 ]
 
 ROOT_URLCONF = 'diplomniy_proekt_core.urls'
@@ -151,24 +152,18 @@ AUTH_USER_MODEL = 'users_reviews.User'
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+
+
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '105370982746-h5j8e1sks4cv9mqlkg36te5pl89m7chq.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'GOCSPX-EO9O02SVd4ns55OTL3vCCT2B3H2'
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/complete/google-oauth2/'
 
 AUTHENTICATION_BACKENDS = (
-
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.contrib.vkontakte.VKontakteOAuth2Backend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.contrib.yandex.YandexOAuth2Backend',
-    'social_auth.backends.contrib.mailru.MailruBackend',
-    'social_auth.backends.contrib.odnoklassniki.OdnoklassnikiBackend',
-
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )

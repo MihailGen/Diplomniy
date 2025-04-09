@@ -8,8 +8,32 @@
     {% endblock %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <meta charset="UTF-8">
+<title>Example of Bootstrap 3 Carousel</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<style type="text/css">
+</style>
+
 </head>
 <body>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<nav class="clearfix">
+    <ul class="clearfix">
+        <li><a href="/">HOME</a></li>
+        <li><a href="/films">FILMS</a></li>
+        <li><a href="#">FILM DETAILS</a></li>
+        <li><a href="/register">REGISTER</a></li>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/profile">PROFILE</a></li>
+    </ul>
+    <a href="#" id="pull">Menu</a>
+</nav>
+
+<br>
 <img src="{% static 'img/Kinopoisk_header.jpg' %}">
 <header>
     <div class="company-name">

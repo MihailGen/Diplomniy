@@ -1,12 +1,23 @@
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView, LoginView
+from django.template.defaulttags import url
 from django.urls import path, include
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, )
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from films import views
 from users_reviews.views import (RegisterView, register, reviews_create, ReviewsListView, ReviewsRetrievView,
                                  ReviewsUpdateView, ReviewsDestroyView, rating_create)
 
 urlpatterns = [
+
+    #path(r'^$', views.index, name='index'),
+    #path(r'^login/$', LoginView.as_view(template_name='login.html'), name='login'),
+    #path(r'^logout/$', LogoutView.as_view(), name='logout'),
+    #path('', include('social_django.urls', namespace='social')),
+
+    path('', views.main, name='main'),
     path('admin/', admin.site.urls),
     path('base/', views.base),
     path('films/', views.film_list, name='films_list'),
@@ -22,7 +33,7 @@ urlpatterns = [
     path('register/', register, name='register'),
 
     path('', include('users_reviews.urls')),
-    #path('login/', ReviewsListView.as_view(), name='comment-list'),
+    path('login/', ReviewsListView.as_view(), name='comment-list'),
     path('reviews_create/<int:film_id>/', reviews_create, name='reviews_create'),
     path('rating_create/<int:film_id>/', rating_create, name='rating_create'),
     path('reviews/', ReviewsListView.as_view(), name='comment-list'),
@@ -31,7 +42,8 @@ urlpatterns = [
     path('reviews/<int:pk>/delete/', ReviewsDestroyView.as_view(), name='comment-destroy'),
 
     path('', include('social_django.urls')),
-
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']

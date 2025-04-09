@@ -1,6 +1,12 @@
 {% extends "films/base.html" %}
+<p><a href="/">HOME</a></p>
+<p><a href="/films">FILMS</a></p>
+<p><a href="/register">FILMS</a></p>
+<p><a href="/login">LOGIN</a></p>
+<p><a href="/profile">LOGIN</a></p>
 
 {% block title %}Список фильмов{% endblock %}
+
 
 
 {% block content %}
@@ -8,7 +14,7 @@
                     <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success text-white" type="submit">Search</button>
                 </form>
-
+    <p><a href="/">HOME</a></p>
     <ul>
         {% if film_list %}
         {% for film in film_list %}
