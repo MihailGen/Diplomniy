@@ -6,7 +6,6 @@ from django.views.decorators.http import require_POST
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
-from films import views
 from .forms import *
 from .forms import UserRegisterForm
 from .models import Reviews, Ratings
@@ -29,7 +28,6 @@ def rating_create(request, film_id):
     return redirect('film_details', film_id)
 
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -40,7 +38,7 @@ def register(request):
             return redirect('films_list')
     else:
         form = UserRegisterForm()
-        return render(request, 'users_reviews/register.html', {'form': form})
+        return render(request, 'users_reviews/profile.html', {'form': form})
 
 
 def login(request):
@@ -64,7 +62,7 @@ def profile_page(request):
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile_page')
     else:
         form = UserProfileForm(instance=user)
         return render(request, 'users_reviews/profile.html', {'form': form})

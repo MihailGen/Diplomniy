@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
+from rest_framework.permissions import IsAuthenticated
 
 from films.models import Film
 
@@ -45,7 +46,8 @@ class User(AbstractUser):
 class Reviews(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='Рецензия')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Рецензия')
-    reviews_body = models.TextField(null=True, blank=True,verbose_name='Рецензия')
+    reviews_body = models.TextField(null=True, blank=True, verbose_name='Рецензия')
+    permission_classes = [IsAuthenticated]
 
     class Meta:
         verbose_name = 'Рецензия'
@@ -63,6 +65,7 @@ class Ratings(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='Рейтинг')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Рейтинг')
     rating = models.IntegerField(choices=RATING_CHOICES)
+    permission_classes = [IsAuthenticated]
 
     class Meta:
         verbose_name = 'Рейтинг'

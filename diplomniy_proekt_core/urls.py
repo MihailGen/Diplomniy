@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from films import views
 from users_reviews.views import (RegisterView, register, reviews_create, ReviewsListView, ReviewsRetrievView,
-                                 ReviewsUpdateView, ReviewsDestroyView, rating_create)
+                                 ReviewsUpdateView, ReviewsDestroyView, rating_create, login, profile_page)
 
 urlpatterns = [
 
@@ -33,7 +33,11 @@ urlpatterns = [
     path('register/', register, name='register'),
 
     path('', include('users_reviews.urls')),
-    path('login/', ReviewsListView.as_view(), name='comment-list'),
+    path('login/', login, name='login'),
+
+    path('accounts/profile/', profile_page, name='profile_page'),
+
+
     path('reviews_create/<int:film_id>/', reviews_create, name='reviews_create'),
     path('rating_create/<int:film_id>/', rating_create, name='rating_create'),
     path('reviews/', ReviewsListView.as_view(), name='comment-list'),
@@ -41,9 +45,9 @@ urlpatterns = [
     path('reviews/<int:pk>/update/', ReviewsUpdateView.as_view(), name='comment-update'),
     path('reviews/<int:pk>/delete/', ReviewsDestroyView.as_view(), name='comment-destroy'),
 
-    path('', include('social_django.urls')),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('social-auth/', include('social_django.urls', namespace='social')),
+    #path('', include('social_django.urls')),
+    #path('logout/', LogoutView.as_view(), name='logout'),
+    #path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']

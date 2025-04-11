@@ -151,9 +151,9 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'users_reviews.User'
 
 LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+#LOGOUT_URL = 'logout'
+#LOGIN_REDIRECT_URL = 'home'
+#LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
 
 
 
@@ -163,7 +163,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'GOCSPX-EO9O02SVd4ns55OTL3vCCT2B3H2'
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/complete/google-oauth2/'
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOpenId',
+    #'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )

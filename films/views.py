@@ -1,14 +1,11 @@
-from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
-from django.template import loader
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
-from social_core.backends.utils import load_backends
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from films.models import Film, Film_details, Genre, Tags
 from films.serializers import FilmSerializer, Film_detailsSerializer, GenreSerializer, TagSerializer
@@ -19,28 +16,7 @@ def main(request):
     posters_list = Film_details.objects.select_related('film').values('poster', 'film').all()
     film_list = Film_details.objects.all().select_related('film')
     print(film_list)
-    return render(request, 'films/main.html', {'posters_list': posters_list,'film_list': film_list})
-
-'''
-def login(request):
-    return render(request, 'login.html')
-'''
-
-
-@login_required
-def index(request):
-    return HttpResponse('OK, Google!')
-
-"""
-@login_required
-def home(request):
-    return render(request, 'home.html')
-"""
-
-def login(request):
-    social_backends = load_backends()
-    context = {'social_backends': social_backends}
-    return render(request, 'login.html', context)
+    return render(request, 'films/main.html', {'posters_list': posters_list, 'film_list': film_list})
 
 
 def base(request):
@@ -51,7 +27,6 @@ def film_details(request, film_id):
     film = Film_details.objects.get(id=film_id)
     reviews = Reviews.objects.filter(film=film_id)
     try:
-        #rating = Ratings.objects.get(film_id=film_id, user_id=request.user).latest(field_name=id)
         rating = Ratings.objects.get(film_id=film_id, user_id=request.user)
     except:
         rating = 0
@@ -105,9 +80,6 @@ class GenreViewSet(viewsets.ModelViewSet):  # Класс-контроллер, �
 class TagViewSet(viewsets.ModelViewSet):  # Класс-контроллер, для создания набора контроллеров на осное VieSet
     queryset = Tags.objects.all()  # Набор данных для работы в контроллерах
     serializer_class = TagSerializer  # класс-сериализатор
-
-
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
